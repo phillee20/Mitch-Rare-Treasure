@@ -11,6 +11,7 @@ const seed = ({ shopData, treasureData }) => {
       CREATE TABLE shops (
         shop_id SERIAL PRIMARY KEY,
         shop_name VARCHAR(255) NOT NULL,
+        owner VARCHAR(255) NOT NULL,
         slogan TEXT
       );`);
     })
