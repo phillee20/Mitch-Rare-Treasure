@@ -39,7 +39,14 @@ Mitch was going to enter this data by hand, but it was getting a little tiresome
 
 You will need to think about how to maintain relationships between the data before they are inserted into the db. In the database, treasures should reference the shop they belong to by the **shop_id**.
 
-> When introducing new functionality into your seed file (or any file for that matter), it's important to remember to ask yourself: "Could I build this with TDD?". `node-postgres`, although it isn't our code, is a fully tested library. This means that we can use it and have a good degree of confidence in its effectiveness. If you need to add functionality to manipulate the data in any way, that's the time to start testing! Be sure that you build any seed utility functions you require using TDD.
+> When introducing new functionality into your seed file (or any file for that matter), it's important to remember to ask yourself: "Could I build this with TDD?". `node-postgres`, although it isn't our code, is a fully tested library. This means that we can use it and have a good degree of confidence in its effectiveness.
+
+#### Utility functions
+
+Eventually, you'll reach a point where you'll need to manipulate the data in order to insert it correctly. That means that you'll have to build some **seed utility functions**, using TDD. The following tutorials will be helpful to you, so please take a moment to watch these:
+
+1. [How to create a lookup table](https://youtu.be/Vr0xX1QF6vE)
+1. [How to format data using the lookup table](https://www.youtube.com/watch?v=wjEZ089JwIU)
 
 ## Part 2: Build the api
 
