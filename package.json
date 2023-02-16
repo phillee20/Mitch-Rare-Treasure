@@ -15,7 +15,8 @@
   "scripts": {
     "setup-dbs": "psql -f db/setup.sql",
     "seed": "node ./db/run-seed.js",
-    "test": "jest"
+    "test": "jest",
+    "dev": "node listen.js"
   },
   "keywords": [],
   "author": "",
