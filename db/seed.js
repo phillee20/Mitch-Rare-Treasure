@@ -1,17 +1,17 @@
 const db = require("./index");
 const format = require("pg-format");
-
+const createRefForShop = require('./utils')
 const seed = ({ shopData, treasureData }) => {
-  return (
-    db
-      .query(`DROP TABLE IF EXISTS treasures;`)
-      .then(() => {
-        return db.query(`DROP TABLE IF EXISTS shops;`);
-        // drop any existing shops table
-      })
-      // then: create some new tables - but which first and why?
-      .then(() => {
-        return db.query(`
+	return (
+		db
+			.query(`DROP TABLE IF EXISTS treasures;`)
+			.then(() => {
+				return db.query(`DROP TABLE IF EXISTS shops;`);
+				// drop any existing shops table
+			})
+			// then: create some new tables - but which first and why?
+			.then(() => {
+				return db.query(`
 		CREATE TABLE shops (
 			shop_id SERIAL PRIMARY KEY,
 			shop_name VARCHAR(50) NOT NULL,
@@ -20,9 +20,9 @@ const seed = ({ shopData, treasureData }) => {
 		);
 		
 		`);
-      })
-      .then(() => {
-        return db.query(`
+			})
+			.then(() => {
+				return db.query(`
 		CREATE TABLE treasures (
         treasure_id SERIAL PRIMARY KEY,
         treasure_name VARCHAR(50) NOT NULL,
@@ -32,24 +32,34 @@ const seed = ({ shopData, treasureData }) => {
 		shop_id INT REFERENCES shops(shop_id)
 		);
 			`);
-      })
-      .then(() => {
-        const formattedShopsData = shopData.map((shop) => {
-          return Object.values(shop);
-        });
-        const insertShopData = format(
-          `
+			})
+			.then(() => {
+				const formattedShopsData = shopData.map((shop) => {
+					return Object.values(shop);
+				});
+				const insertShopData = format(
+					`
 		INSERT INTO shops (
 			shop_name, owner, slogan
 		)
 		VALUES %L RETURNING *;`,
-          formattedShopsData
-        );
-        return db.query(insertShopData);
-      })
-  );
+					formattedShopsData
+				);
+				return db.query(insertShopData);
+			})
+			.then(({rows}) => {
+			
+			const refObj = 	createRefForShop(rows)
+				console.log(refObj)
+				  
+			})
+
+	
+)
 
   // then: insert the raw data into the tables.
 };
 
 module.exports = seed;
+
+
