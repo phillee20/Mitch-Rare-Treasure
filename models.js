@@ -1,8 +1,10 @@
 const db = require("./db");
 
-exports.selectTreasures = () => {
-  let secondQuery = `SELECT * FROM treasures;`;
-  return db.query(secondQuery).then((result) => {
-    return result.rows[0];
+selectTreasures = () => {
+  let strQuery = `SELECT * FROM treasures;`;
+  return db.query(strQuery).then((result) => {
+    return result.rows;
   });
 };
+
+module.exports = { selectTreasures };

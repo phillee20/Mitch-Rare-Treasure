@@ -29,8 +29,8 @@ describe("GET /api/treasures", () => {
               treasure_name: expect.any(String),
               colour: expect.any(String),
               age: expect.any(Number),
-              cost_at_auction: expect.any(String),
-              shop_name: expect.any(String),
+              cost_at_auction: expect.any(Number),
+              shop_id: expect.any(Number),
             })
           );
         });
