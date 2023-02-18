@@ -9,7 +9,7 @@ const seed = ({ shopData, treasureData }) => {
       .then(() => {
         return db.query(`DROP TABLE IF EXISTS shops;`);
       })
-      // then: create some new tables - but which first and why?
+      // then: create some new tables - but which first and why? Shops first as it has no dependencies. Treasures has shops.
       .then(() => {
         return db.query(`
 		CREATE TABLE shops (
@@ -32,11 +32,12 @@ const seed = ({ shopData, treasureData }) => {
 		);
 			`);
       })
-      // then: insert the raw data into the tables.
+      // then: insert the raw data into the tables - Shops first, then treasures.
       .then(() => {
         const formattedShopsData = shopData.map((shop) => {
           return Object.values(shop);
         });
+        //console.log(formattedShopsData, "formatted!!");  -- This gives the values of the keys within shops dev-data!
         const insertShopString = format(
           `
 		INSERT INTO shops (
